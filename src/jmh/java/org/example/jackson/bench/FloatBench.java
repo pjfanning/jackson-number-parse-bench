@@ -1,7 +1,7 @@
 package org.example.jackson.bench;
 
 import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.json.JsonReadFeature;
+import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.apache.commons.io.IOUtils;
@@ -17,7 +17,7 @@ public class FloatBench {
 
     static {
         try {
-           JsonFactory factory = JsonFactory.builder().enable(JsonReadFeature.USE_FAST_DOUBLE_PARSER).build();
+           JsonFactory factory = JsonFactory.builder().enable(StreamReadFeature.USE_FAST_DOUBLE_PARSER).build();
            MAPPER = JsonMapper.builder(factory).build();
         } catch (Exception e) {
             throw new RuntimeException(e);
