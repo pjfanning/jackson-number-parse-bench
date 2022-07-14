@@ -10,7 +10,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-public class FloatBench {
+public class FloatBench extends BenchmarkLauncher {
 
     private static String ARRAY_TEXT;
     private static ObjectMapper MAPPER;
