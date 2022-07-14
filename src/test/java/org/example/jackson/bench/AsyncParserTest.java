@@ -2,7 +2,6 @@ package org.example.jackson.bench;
 
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.core.async.ByteArrayFeeder;
 import com.fasterxml.jackson.core.json.async.NonBlockingJsonParser;
 import org.apache.commons.io.IOUtils;
