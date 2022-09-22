@@ -1,7 +1,11 @@
 package org.example.jackson.bench;
 
+import org.apache.commons.pool2.ObjectPool;
+import org.apache.commons.pool2.impl.GenericObjectPool;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.NoSuchElementException;
 
 // Based on a great idea of Eric Obermühlner to use a tree of smaller BigDecimals for parsing
 // really big numbers with O(n^1.5) complexity instead of O(n^2) when using the constructor
@@ -22,6 +26,7 @@ import java.math.BigInteger;
 public final class FastBigDecimalParser
 {
     private final static int MAX_CHARS_TO_REPORT = 1000;
+    private final static ObjectPool<int[]> intArrayPool = new GenericObjectPool<>(new IntArrayPoolFactory());
 
     private FastBigDecimalParser() {}
 
@@ -165,8 +170,14 @@ public final class FastBigDecimalParser
                                               final boolean isNeg, final int scale) {
         final int len = limit - p;
         final int last = Math.toIntExact(len * 445861642L >> 32); // (len * Math.log(10) / Math.log(1L << 32))
-        final int[] magnitude = new int[32]; //TODO possibly, find a way so that these arrays can be reused
-
+        final int[] magnitude;
+        try {
+            magnitude = intArrayPool.borrowObject();
+        } catch (RuntimeException runtimeException) {
+            throw runtimeException;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         long x = 0L;
         final int firstBlockLimit = len % 9 + p;
         int pos = p;
