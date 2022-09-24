@@ -10,12 +10,10 @@ import java.math.BigInteger;
 // https://github.com/eobermuhlner/big-math/commit/7a5419aac8b2adba2aa700ccf00197f97b2ad89f
 
 /**
- * Helper class used to implement more optimized parsing of {@link BigDecimal} for REALLY
- * big values (over 500 characters)
+ * Helper class used to implement more optimized parsing of {@link BigDecimal}.
  *<p>
- * Based on ideas from this
- * <a href="https://github.com/eobermuhlner/big-math/commit/7a5419aac8b2adba2aa700ccf00197f97b2ad89f">this
- * git commit</a>.
+ * Basically a Java port of the BigDecimal parser code in <a href ="https://github.com/plokhotnyuk/jsoniter-scala/blob/master/jsoniter-scala-core/jvm/src/main/scala/com/github/plokhotnyuk/jsoniter_scala/core/JsonReader.scala">plokhotnyuk/jsoniter_scala</a>.
+ * jsoniter-scala code was partly inspired by <a href="https://github.com/eobermuhlner/big-math/commit/7a5419aac8b2adba2aa700ccf00197f97b2ad89f">eobermuhlner/big-math</a>.
  *
  * @since 2.15
  */
