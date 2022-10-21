@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id "me.champeau.jmh" version "0.6.6"
+    id "me.champeau.jmh" version "0.6.8"
 }
 
 group 'org.example'
@@ -17,10 +17,14 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0-SNAPSHOT'
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.apache.commons:commons-pool2:2.11.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
 }
 
 test {
     useJUnitPlatform()
+}
+
+jmh {
+    includes = ['org.example.jackson.bench.BigIntegerParserBench']
 }
