@@ -14,7 +14,6 @@ import java.math.BigInteger;
  */
 public final class FastBigDecimalParser
 {
-    private final static int MAX_CHARS_TO_REPORT = 1000;
 
     private FastBigDecimalParser() {}
 
