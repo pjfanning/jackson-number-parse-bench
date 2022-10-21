@@ -30,6 +30,16 @@ public class FastBigDecimalParserTest {
         testParse("-1E-3");
     }
 
+    @Test
+    public void testParseLongInt() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < 1000; i++) {
+            stringBuilder.append(7);
+        }
+        String test1000 = stringBuilder.toString();
+        testParse(test1000);
+    }
+
     private void testParse(String s) {
         assertEquals(new BigDecimal(s), FastBigDecimalParser.parse(s));
     }
