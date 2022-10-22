@@ -26,5 +26,5 @@ test {
 }
 
 jmh {
-    includes = ['org.example.jackson.bench.BigIntegerParserBench']
+    includes = ['org.example.jackson.bench.BigIntegerJsonParseBench']
 }

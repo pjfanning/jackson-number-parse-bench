@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.io.BigDecimalParser;
 import org.openjdk.jmh.annotations.Benchmark;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 
 public class BigIntegerParserBench extends BenchmarkLauncher {
     static String test1000;
