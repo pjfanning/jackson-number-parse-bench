@@ -1,5 +1,6 @@
 package org.example.jackson.bench;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -21,7 +22,9 @@ public class BigIntegerJsonParseBench extends BenchmarkLauncher {
         test1000000 = stringBuilder.toString();
     }
 
-    static ObjectMapper objectMapper = JsonMapper.builder().build();
+    static ObjectMapper objectMapper = JsonMapper.builder()
+            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .build();
     
     @Benchmark
     public void bigParse1000() throws Exception {
