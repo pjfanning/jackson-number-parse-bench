@@ -36,6 +36,16 @@ public class BigIntegerJsonParseBench extends BenchmarkLauncher {
         objectMapper.readValue(genJson(test1000000), ExtractFields.class);
     }
 
+    @Benchmark
+    public void annotatedBigParse1000() throws Exception {
+        objectMapper.readValue(genJson(test1000), AnnotatedExtractFields.class);
+    }
+
+    @Benchmark
+    public void annotatedBigParse1000000() throws Exception {
+        objectMapper.readValue(genJson(test1000000), AnnotatedExtractFields.class);
+    }
+
     private String genJson(String num) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder
