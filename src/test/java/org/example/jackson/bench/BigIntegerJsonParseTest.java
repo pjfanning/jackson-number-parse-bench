@@ -26,6 +26,11 @@ public class BigIntegerJsonParseTest {
         ExtractFields ef = objectMapper.readValue(genJson(test1000000), ExtractFields.class);
     }
 
+    @Test
+    public void annotatedBigParse1000() throws Exception {
+        AnnotatedExtractFields ef = objectMapper.readValue(genJson(test1000000), AnnotatedExtractFields.class);
+    }
+
     private String genJson(String num) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder

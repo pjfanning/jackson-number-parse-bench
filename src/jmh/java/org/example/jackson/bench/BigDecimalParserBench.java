@@ -1,6 +1,7 @@
 package org.example.jackson.bench;
 
 import com.fasterxml.jackson.core.io.BigDecimalParser;
+import org.example.jackson.bench.doubleparser.JavaBigDecimalParser;
 import org.openjdk.jmh.annotations.Benchmark;
 
 import java.util.ArrayList;
@@ -37,6 +38,13 @@ public class BigDecimalParserBench extends BenchmarkLauncher {
     public void fastParser() throws Exception {
         for (String s : values) {
             FastBigDecimalParser.parse(s);
+        }
+    }
+
+    @Benchmark
+    public void fastParser2() throws Exception {
+        for (String s : values) {
+            JavaBigDecimalParser.parseBigDecimal(s);
         }
     }
 }
