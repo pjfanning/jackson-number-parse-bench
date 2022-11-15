@@ -10,6 +10,7 @@
 package org.example.jackson.bench.doubleparser;
 
 import static org.example.jackson.bench.doubleparser.FastDoubleMath.*;
+import static org.example.jackson.bench.doubleparser.FastIntegerMath.fullMultiplication;
 
 /**
  * This class complements {@link FastDoubleMath} with methods for
@@ -198,7 +199,7 @@ class FastFloatMath {
         // We want the most significant 64 bits of the product. We know
         // this will be non-zero because the most significant bit of i is
         // 1.
-        FastDoubleMath.UInt128 product = fullMultiplication(digits, factorMantissa);
+        FastIntegerMath.UInt128 product = fullMultiplication(digits, factorMantissa);
         long lower = product.low;
         long upper = product.high;
         // We know that upper has at most one leading zero because

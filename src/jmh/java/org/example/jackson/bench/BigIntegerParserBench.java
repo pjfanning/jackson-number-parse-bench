@@ -1,6 +1,7 @@
 package org.example.jackson.bench;
 
 import com.fasterxml.jackson.core.io.BigDecimalParser;
+import org.example.jackson.bench.doubleparser.JavaBigIntegerParser;
 import org.openjdk.jmh.annotations.Benchmark;
 
 import java.math.BigInteger;
@@ -49,6 +50,16 @@ public class BigIntegerParserBench extends BenchmarkLauncher {
     @Benchmark
     public void fastBigDec1000000() throws Exception {
         FastBigDecimalParser.parse(test1000000).toBigInteger();
+    }
+
+    @Benchmark
+    public void javaBigIntegerParser1000() throws Exception {
+        JavaBigIntegerParser.parseBigIntegerOrNull(test1000);
+    }
+
+    @Benchmark
+    public void javaBigIntegerParser1000000() throws Exception {
+        JavaBigIntegerParser.parseBigIntegerOrNull(test1000000);
     }
 
 }

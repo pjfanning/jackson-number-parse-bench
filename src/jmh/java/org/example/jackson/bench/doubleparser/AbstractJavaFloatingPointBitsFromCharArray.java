@@ -83,12 +83,12 @@ abstract class AbstractJavaFloatingPointBitsFromCharArray extends AbstractFloatV
                 illegal |= virtualIndexOfPoint >= 0;
                 virtualIndexOfPoint = index;
                 for (; index < endIndex - 4; index += 4) {
-                    int eightDigits = FastDoubleSwar.tryToParseFourDigitsUtf16(str, index + 1);
-                    if (eightDigits < 0) {
+                    int digits = FastDoubleSwar.tryToParseFourDigits(str, index + 1);
+                    if (digits < 0) {
                         break;
                     }
                     // This might overflow, we deal with it later.
-                    significand = 10_000L * significand + eightDigits;
+                    significand = 10_000L * significand + digits;
                 }
             } else {
                 break;
@@ -118,7 +118,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharArray extends AbstractFloatV
             illegal |= !isDigit(ch);
             do {
                 // Guard against overflow
-                if (expNumber < AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
+                if (expNumber < org.example.jackson.bench.doubleparser.AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
                     expNumber = 10 * (expNumber) + ch - '0';
                 }
                 ch = ++index < endIndex ? str[index] : 0;
@@ -156,7 +156,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharArray extends AbstractFloatV
                 if (ch == '.') {
                     skipCountInTruncatedDigits++;
                 } else {
-                    if (Long.compareUnsigned(significand, AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
+                    if (Long.compareUnsigned(significand, org.example.jackson.bench.doubleparser.AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
                         significand = 10 * (significand) + ch - '0';
                     } else {
                         break;
@@ -304,10 +304,10 @@ abstract class AbstractJavaFloatingPointBitsFromCharArray extends AbstractFloatV
         for (; index < endIndex; index++) {
             ch = str[index];
             // Table look up is faster than a sequence of if-else-branches.
-            int hexValue = ch > 127 ? AbstractFloatValueParser.OTHER_CLASS : AbstractFloatValueParser.CHAR_TO_HEX_MAP[ch];
+            int hexValue = ch > 127 ? org.example.jackson.bench.doubleparser.AbstractFloatValueParser.OTHER_CLASS : org.example.jackson.bench.doubleparser.AbstractFloatValueParser.CHAR_TO_HEX_MAP[ch];
             if (hexValue >= 0) {
                 significand = (significand << 4) | hexValue;// This might overflow, we deal with it later.
-            } else if (hexValue == AbstractFloatValueParser.DECIMAL_POINT_CLASS) {
+            } else if (hexValue == org.example.jackson.bench.doubleparser.AbstractFloatValueParser.DECIMAL_POINT_CLASS) {
                 illegal |= virtualIndexOfPoint >= 0;
                 virtualIndexOfPoint = index;
                 /*
@@ -331,7 +331,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharArray extends AbstractFloatV
             virtualIndexOfPoint = significandEndIndex;
         } else {
             digitCount = significandEndIndex - significandStartIndex - 1;
-            exponent = Math.min(virtualIndexOfPoint - index + 1, AbstractFloatValueParser.MAX_EXPONENT_NUMBER) * 4;
+            exponent = Math.min(virtualIndexOfPoint - index + 1, org.example.jackson.bench.doubleparser.AbstractFloatValueParser.MAX_EXPONENT_NUMBER) * 4;
         }
 
         // Parse exponent
@@ -347,7 +347,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharArray extends AbstractFloatV
             illegal |= !isDigit(ch);
             do {
                 // Guard against overflow
-                if (expNumber < AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
+                if (expNumber < org.example.jackson.bench.doubleparser.AbstractFloatValueParser.MAX_EXPONENT_NUMBER) {
                     expNumber = 10 * (expNumber) + ch - '0';
                 }
                 ch = ++index < endIndex ? str[index] : 0;
@@ -384,9 +384,9 @@ abstract class AbstractJavaFloatingPointBitsFromCharArray extends AbstractFloatV
             for (index = significandStartIndex; index < significandEndIndex; index++) {
                 ch = str[index];
                 // Table look up is faster than a sequence of if-else-branches.
-                int hexValue = ch > 127 ? AbstractFloatValueParser.OTHER_CLASS : AbstractFloatValueParser.CHAR_TO_HEX_MAP[ch];
+                int hexValue = ch > 127 ? org.example.jackson.bench.doubleparser.AbstractFloatValueParser.OTHER_CLASS : org.example.jackson.bench.doubleparser.AbstractFloatValueParser.CHAR_TO_HEX_MAP[ch];
                 if (hexValue >= 0) {
-                    if (Long.compareUnsigned(significand, AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
+                    if (Long.compareUnsigned(significand, org.example.jackson.bench.doubleparser.AbstractFloatValueParser.MINIMAL_NINETEEN_DIGIT_INTEGER) < 0) {
                         significand = (significand << 4) | hexValue;
                     } else {
                         break;
@@ -405,7 +405,7 @@ abstract class AbstractJavaFloatingPointBitsFromCharArray extends AbstractFloatV
     }
 
     private long tryToParseEightHexDigits(char[] str, int offset) {
-        return FastDoubleSwar.tryToParseEightHexDigitsUtf16(str, offset);
+        return FastDoubleSwar.tryToParseEightHexDigits(str, offset);
     }
 
     /**
