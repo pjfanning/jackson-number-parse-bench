@@ -22,12 +22,18 @@ public class BigIntegerJsonParseTest {
             .build();
 
     @Test
-    public void bigParse1000() throws Exception {
+    public void bigParse() throws Exception {
         ExtractFields ef = objectMapper.readValue(genJson(test1000000), ExtractFields.class);
     }
 
     @Test
-    public void annotatedBigParse1000() throws Exception {
+    public void bigParseNoDefaultConstructor() throws Exception {
+        ExtractFieldsNoDefaultConstructor ef =
+                objectMapper.readValue(genJson(test1000000), ExtractFieldsNoDefaultConstructor.class);
+    }
+
+    @Test
+    public void annotatedBigParse() throws Exception {
         AnnotatedExtractFields ef = objectMapper.readValue(genJson(test1000000), AnnotatedExtractFields.class);
     }
 

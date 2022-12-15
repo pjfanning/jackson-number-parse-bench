@@ -3,6 +3,7 @@ package org.example.jackson.bench;
 import com.fasterxml.jackson.core.io.BigDecimalParser;
 import org.example.jackson.bench.doubleparser.JavaBigIntegerParser;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.infra.Blackhole;
 
 import java.math.BigInteger;
 
@@ -23,43 +24,43 @@ public class BigIntegerParserBench extends BenchmarkLauncher {
     }
     
     @Benchmark
-    public void bigInt1000() throws Exception {
-        new BigInteger(test1000);
+    public void bigInt1000(Blackhole blackhole) throws Exception {
+        blackhole.consume(new BigInteger(test1000));
     }
 
     @Benchmark
-    public void bigInt1000000() throws Exception {
-        new BigInteger(test1000000);
+    public void bigInt1000000(Blackhole blackhole) throws Exception {
+        blackhole.consume(new BigInteger(test1000000));
     }
 
     @Benchmark
-    public void bigDec1000() throws Exception {
-        BigDecimalParser.parse(test1000).toBigInteger();
+    public void bigDec1000(Blackhole blackhole) throws Exception {
+        blackhole.consume(BigDecimalParser.parse(test1000).toBigInteger());
     }
 
     @Benchmark
-    public void bigDec1000000() throws Exception {
-        BigDecimalParser.parse(test1000000).toBigInteger();
+    public void bigDec1000000(Blackhole blackhole) throws Exception {
+        blackhole.consume(BigDecimalParser.parse(test1000000).toBigInteger());
     }
 
     @Benchmark
-    public void fastBigDec1000() throws Exception {
-        FastBigDecimalParser.parse(test1000).toBigInteger();
+    public void fastBigDec1000(Blackhole blackhole) throws Exception {
+        blackhole.consume(FastBigDecimalParser.parse(test1000).toBigInteger());
     }
 
     @Benchmark
-    public void fastBigDec1000000() throws Exception {
-        FastBigDecimalParser.parse(test1000000).toBigInteger();
+    public void fastBigDec1000000(Blackhole blackhole) throws Exception {
+        blackhole.consume(FastBigDecimalParser.parse(test1000000).toBigInteger());
     }
 
     @Benchmark
-    public void javaBigIntegerParser1000() throws Exception {
-        JavaBigIntegerParser.parseBigIntegerOrNull(test1000);
+    public void javaBigIntegerParser1000(Blackhole blackhole) throws Exception {
+        blackhole.consume(JavaBigIntegerParser.parseBigIntegerOrNull(test1000));
     }
 
     @Benchmark
-    public void javaBigIntegerParser1000000() throws Exception {
-        JavaBigIntegerParser.parseBigIntegerOrNull(test1000000);
+    public void javaBigIntegerParser1000000(Blackhole blackhole) throws Exception {
+        blackhole.consume(JavaBigIntegerParser.parseBigIntegerOrNull(test1000000));
     }
 
 }
