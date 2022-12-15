@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import org.apache.commons.io.IOUtils;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.infra.Blackhole;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -30,7 +31,7 @@ public class FloatBench extends BenchmarkLauncher {
     }
 
     @Benchmark
-    public void bigArrayOfFloatPrimitives() throws Exception {
-        float[] floats = MAPPER.readValue(ARRAY_TEXT, float[].class);
+    public void bigArrayOfFloatPrimitives(Blackhole blackhole) throws Exception {
+        blackhole.consume(MAPPER.readValue(ARRAY_TEXT, float[].class));
     }
 }

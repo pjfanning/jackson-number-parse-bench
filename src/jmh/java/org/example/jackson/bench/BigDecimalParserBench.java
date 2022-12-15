@@ -3,6 +3,7 @@ package org.example.jackson.bench;
 import com.fasterxml.jackson.core.io.BigDecimalParser;
 import org.example.jackson.bench.doubleparser.JavaBigDecimalParser;
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.ArrayList;
 
@@ -28,23 +29,23 @@ public class BigDecimalParserBench extends BenchmarkLauncher {
     }
     
     @Benchmark
-    public void currentParser() throws Exception {
+    public void currentParser(Blackhole blackhole) throws Exception {
         for (String s : values) {
-            BigDecimalParser.parse(s);
+            blackhole.consume(BigDecimalParser.parse(s));
         }
     }
 
     @Benchmark
-    public void fastParser() throws Exception {
+    public void fastParser(Blackhole blackhole) throws Exception {
         for (String s : values) {
-            FastBigDecimalParser.parse(s);
+            blackhole.consume(FastBigDecimalParser.parse(s));
         }
     }
 
     @Benchmark
-    public void fastParser2() throws Exception {
+    public void fastParser2(Blackhole blackhole) throws Exception {
         for (String s : values) {
-            JavaBigDecimalParser.parseBigDecimal(s);
+            blackhole.consume(JavaBigDecimalParser.parseBigDecimal(s));
         }
     }
 }
