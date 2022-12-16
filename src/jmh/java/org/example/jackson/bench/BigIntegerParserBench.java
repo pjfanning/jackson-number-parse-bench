@@ -1,7 +1,7 @@
 package org.example.jackson.bench;
 
+import ch.randelshofer.fastdoubleparser.JavaBigIntegerParser;
 import com.fasterxml.jackson.core.io.BigDecimalParser;
-import org.example.jackson.bench.doubleparser.JavaBigIntegerParser;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.infra.Blackhole;
 
@@ -55,12 +55,12 @@ public class BigIntegerParserBench extends BenchmarkLauncher {
 
     @Benchmark
     public void javaBigIntegerParser1000(Blackhole blackhole) throws Exception {
-        blackhole.consume(JavaBigIntegerParser.parseBigIntegerOrNull(test1000));
+        blackhole.consume(JavaBigIntegerParser.parseBigInteger(test1000));
     }
 
     @Benchmark
     public void javaBigIntegerParser1000000(Blackhole blackhole) throws Exception {
-        blackhole.consume(JavaBigIntegerParser.parseBigIntegerOrNull(test1000000));
+        blackhole.consume(JavaBigIntegerParser.parseBigInteger(test1000000));
     }
 
 }

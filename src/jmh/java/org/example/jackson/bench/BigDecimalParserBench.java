@@ -1,7 +1,7 @@
 package org.example.jackson.bench;
 
+import ch.randelshofer.fastdoubleparser.JavaBigDecimalParser;
 import com.fasterxml.jackson.core.io.BigDecimalParser;
-import org.example.jackson.bench.doubleparser.JavaBigDecimalParser;
 import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.infra.Blackhole;
 
