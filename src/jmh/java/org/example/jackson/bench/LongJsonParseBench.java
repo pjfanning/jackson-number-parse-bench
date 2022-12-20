@@ -13,7 +13,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 
 @OutputTimeUnit(TimeUnit.SECONDS)
-public class LongParserBench {
+public class LongJsonParseBench {
 
     private static final JsonFactory JSON_FACTORY = new JsonFactory();
 
