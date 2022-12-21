@@ -38,4 +38,11 @@ public class LongParserBench extends BenchmarkLauncher {
             blackhole.consume(NumberUtil.alternateParseLong(LONGS[i]));
         }
     }
+
+    @Benchmark
+    public void javaParse(Blackhole blackhole) throws Exception {
+        for (int i = 0; i < LEN; i++) {
+            blackhole.consume(Long.parseLong(LONGS[i]));
+        }
+    }
 }
