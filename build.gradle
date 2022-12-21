@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id "me.champeau.jmh" version "0.6.8"
+    id "com.github.johnrengelman.shadow" version "7.1.2"
 }
 
 group 'org.example'
@@ -24,6 +25,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+jmhJar {
+    manifest {
+       attributes 'Multi-Release': 'true'
+    }
 }
 
 jmh {
