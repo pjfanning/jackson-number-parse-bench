@@ -40,6 +40,20 @@ public class LongParserBench extends BenchmarkLauncher {
     }
 
     @Benchmark
+    public void alternateJacksonParseSimplified(Blackhole blackhole) {
+        for (int i = 0; i < LEN; i++) {
+            blackhole.consume(NumberUtil.alternateParseSimplified(LONGS[i]));
+        }
+    }
+    
+    @Benchmark
+    public void alternateJacksonParseSwitch(Blackhole blackhole) {
+        for (int i = 0; i < LEN; i++) {
+            blackhole.consume(NumberUtil.alternateParseSwitch(LONGS[i]));
+        }
+    }
+
+    @Benchmark
     public void javaParse(Blackhole blackhole) throws Exception {
         for (int i = 0; i < LEN; i++) {
             blackhole.consume(Long.parseLong(LONGS[i]));
