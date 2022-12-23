@@ -44,10 +44,10 @@ public class NumberUtil {
                 return Long.parseLong(s);
             }
             num = (num * 10) + (c - '0');
-            if (i == len - 1 && num < 0) {
-                // overflow
-                throw new NumberFormatException("For input string: " + s);
-            }
+        }
+        if (num < 0) {
+            // overflow
+            throw new NumberFormatException("For input string: " + s);
         }
         return neg ? -num : num;
     }
@@ -75,7 +75,7 @@ public class NumberUtil {
         }
         long num = s.charAt(len - 1) - '0';
         
-        switch(len- off) {
+        switch(len - off) {
             case 19: 
                 num += (digitAt(s, len - 19)) * 1000000000000000000L;
             case 18: 
@@ -112,6 +112,10 @@ public class NumberUtil {
               num += (digitAt(s, len - 3)) * 100L;
             case 2: 
               num += (digitAt(s, len - 2)) * 10L;
+        }
+        if (num < 0) {
+            // overflow
+            throw new NumberFormatException("For input string: " + s);
         }
         return neg ? -num : num;
     }
