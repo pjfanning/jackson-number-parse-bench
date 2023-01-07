@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
-    implementation 'ch.randelshofer:fastdoubleparser:0.5.3'
+    implementation 'ch.randelshofer:fastdoubleparser:0.6.0'
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.apache.commons:commons-pool2:2.11.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
@@ -34,5 +34,5 @@ jmhJar {
 }
 
 jmh {
-    includes = ['org.example.jackson.bench.LongParserBench']
+    includes = ['org.example.jackson.bench.BigDecimalParserBench']
 }

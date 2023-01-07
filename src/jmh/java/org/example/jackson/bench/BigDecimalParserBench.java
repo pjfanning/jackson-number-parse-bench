@@ -43,7 +43,7 @@ public class BigDecimalParserBench extends BenchmarkLauncher {
     }
 
     @Benchmark
-    public void fastParser2(Blackhole blackhole) throws Exception {
+    public void randelshoferFastParser(Blackhole blackhole) throws Exception {
         for (String s : values) {
             blackhole.consume(JavaBigDecimalParser.parseBigDecimal(s));
         }
