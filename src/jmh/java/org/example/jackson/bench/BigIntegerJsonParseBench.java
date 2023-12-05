@@ -23,9 +23,7 @@ public class BigIntegerJsonParseBench extends BenchmarkLauncher {
         test1000000 = genJson(stringBuilder.toString());
     }
 
-    static ObjectMapper objectMapper = JsonMapper.builder()
-            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-            .build();
+    private static final ObjectMapper objectMapper = JacksonUtil.objectMapper;
     
     @Benchmark
     public void bigParse1000(Blackhole blackhole) throws Exception {

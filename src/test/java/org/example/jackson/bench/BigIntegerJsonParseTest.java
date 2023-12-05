@@ -1,5 +1,7 @@
 package org.example.jackson.bench;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.StreamReadConstraints;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -17,24 +19,21 @@ public class BigIntegerJsonParseTest {
         test1000000 = stringBuilder.toString();
     }
 
-    static ObjectMapper objectMapper = JsonMapper.builder()
-            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-            .build();
-
     @Test
     public void bigParse() throws Exception {
-        ExtractFields ef = objectMapper.readValue(genJson(test1000000), ExtractFields.class);
+        ExtractFields ef = JacksonUtil.objectMapper.readValue(genJson(test1000000), ExtractFields.class);
     }
 
     @Test
     public void bigParseNoDefaultConstructor() throws Exception {
         ExtractFieldsNoDefaultConstructor ef =
-                objectMapper.readValue(genJson(test1000000), ExtractFieldsNoDefaultConstructor.class);
+                JacksonUtil.objectMapper.readValue(genJson(test1000000), ExtractFieldsNoDefaultConstructor.class);
     }
 
     @Test
     public void annotatedBigParse() throws Exception {
-        AnnotatedExtractFields ef = objectMapper.readValue(genJson(test1000000), AnnotatedExtractFields.class);
+        AnnotatedExtractFields ef = JacksonUtil.objectMapper.readValue(
+                genJson(test1000000), AnnotatedExtractFields.class);
     }
 
     private String genJson(String num) {
