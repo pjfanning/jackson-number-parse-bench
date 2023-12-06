@@ -34,5 +34,5 @@ jmhJar {
 }
 
 jmh {
-    includes = ['org.example.jackson.bench.SchubfachBench']
+    includes = ['org.example.jackson.bench.BigDecimalParser2Bench']
 }
